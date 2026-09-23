@@ -33,7 +33,12 @@ final class HistoryStore: ObservableObject {
             .appendingPathComponent("Mindful Bell", isDirectory: true)
         try? FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
         url = folder.appendingPathComponent("history.json")
-        load()
+        if Demo.isEnabled {
+            sits = Demo.sits()
+            NSLog("Stillpoint: demo mode, showing sample history; history.json is not read or written")
+        } else {
+            load()
+        }
     }
 
     func record(_ sit: Sit) {
@@ -135,6 +140,8 @@ final class HistoryStore: ObservableObject {
     }
 
     private func save() {
+        // Demo sits (and any sat during a demo) stay in memory, away from the real history.
+        guard !Demo.isEnabled else { return }
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys]

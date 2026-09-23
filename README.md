@@ -45,6 +45,17 @@ Apps can't switch Focus modes directly, so use a shortcut:
 
 The app runs them through the Shortcuts app, which may come to the front briefly.
 
+## Screenshot demo mode
+
+For App Store screenshots, run with sample data:
+
+1. Product › Scheme › Edit Scheme › Run › Arguments, and tick `-StillpointDemo YES`.
+2. Run (⌘R). History shows about ten weeks of practice with a three-week streak, and Pro is unlocked.
+
+Demo mode never reads or writes your real `history.json` (sits you do during a demo aren't kept) and doesn't touch StoreKit. It exists only in Debug builds, so archived builds can't enter it. **Untick the argument afterwards**, or History will keep showing the sample data.
+
+To shoot the Pro window as a free user, for the in-app purchase review screenshot, untick the argument.
+
 ## App Store checklist
 
 Already in place: App Sandbox, Hardened Runtime, the app icon, a privacy manifest (`PrivacyInfo.xcprivacy`, declaring UserDefaults use and no data collection), the Health & Fitness category, and no network access.
