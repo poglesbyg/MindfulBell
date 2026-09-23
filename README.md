@@ -73,3 +73,4 @@ Still to do:
 | `Store.swift` | Pro purchase, restore, and entitlement checks (StoreKit 2) |
 | `ProView.swift` | Pro window and the PRO badge on locked features |
 | `BellSynth.swift` | Bell sound generation and playback |
+| `AppStore/make_icon.py` | Draws the app icon and writes every size into the asset catalog (`python3 AppStore/make_icon.py`, needs Pillow) |
