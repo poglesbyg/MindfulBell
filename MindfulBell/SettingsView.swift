@@ -13,7 +13,7 @@ struct SettingsView: View {
             if !store.isPro {
                 Section {
                     HStack {
-                        Text("Shortcuts, Siri and Focus are part of Mindful Bell Pro.")
+                        Text("Shortcuts, Siri and Focus are part of Stillpoint Pro.")
                         Spacer()
                         ProBadge()
                     }
@@ -38,7 +38,7 @@ struct SettingsView: View {
             }
 
             Section {
-                Text("In System Settings › Focus, choose a Focus and add the Mindful Bell filter. It can silence Mindful Day bells or start a sit while that Focus is on.")
+                Text("In System Settings › Focus, choose a Focus and add the Stillpoint filter. It can silence Mindful Day bells or start a sit while that Focus is on.")
                 HStack {
                     Spacer()
                     Button("Open Focus Settings") {
@@ -51,7 +51,7 @@ struct SettingsView: View {
             }
 
             Section {
-                Text("Mindful Bell adds these actions to the Shortcuts app: Start Meditation, End Meditation, Ring Bell, Set Mindful Day and Get Meditation Minutes. You can also ask Siri to “Start meditating with Mindful Bell”.")
+                Text("Stillpoint adds these actions to the Shortcuts app: Start Meditation, End Meditation, Ring Bell, Set Mindful Day and Get Meditation Minutes. You can also ask Siri to “Start meditating with Stillpoint”.")
             } header: {
                 Text("Shortcuts actions")
             }

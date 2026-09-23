@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		8B1E00000000000000000001 /* Mindful Bell.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mindful Bell.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B1E00000000000000000001 /* Stillpoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Stillpoint.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B1E00000000000000000002 /* MindfulBell.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MindfulBell.entitlements; sourceTree = "<group>"; };
 		8B1E00000000000000000003 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		8B1E00000000000000000004 /* MindfulBell.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = MindfulBell.storekit; sourceTree = "<group>"; };
@@ -46,7 +46,7 @@
 		8B1E00000000000000000031 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8B1E00000000000000000001 /* Mindful Bell.app */,
+				8B1E00000000000000000001 /* Stillpoint.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -73,7 +73,7 @@
 			packageProductDependencies = (
 			);
 			productName = MindfulBell;
-			productReference = 8B1E00000000000000000001 /* Mindful Bell.app */;
+			productReference = 8B1E00000000000000000001 /* Stillpoint.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -192,7 +192,7 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Mindful Bell";
+				INFOPLIST_KEY_CFBundleDisplayName = "Stillpoint";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -202,7 +202,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.poglesbyg.mindfulbell;
-				PRODUCT_NAME = "Mindful Bell";
+				PRODUCT_NAME = "Stillpoint";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -219,7 +219,7 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Mindful Bell";
+				INFOPLIST_KEY_CFBundleDisplayName = "Stillpoint";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -229,7 +229,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.poglesbyg.mindfulbell;
-				PRODUCT_NAME = "Mindful Bell";
+				PRODUCT_NAME = "Stillpoint";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};

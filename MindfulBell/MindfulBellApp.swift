@@ -35,14 +35,14 @@ struct MindfulBellApp: App {
         }
         .defaultSize(width: 560, height: 620)
 
-        Window("Mindful Bell Settings", id: WindowID.settings) {
+        Window("Stillpoint Settings", id: WindowID.settings) {
             SettingsView()
                 .environmentObject(bell)
                 .environmentObject(store)
         }
         .windowResizability(.contentSize)
 
-        Window("Mindful Bell Pro", id: WindowID.pro) {
+        Window("Stillpoint Pro", id: WindowID.pro) {
             ProView()
                 .environmentObject(bell)
                 .environmentObject(store)

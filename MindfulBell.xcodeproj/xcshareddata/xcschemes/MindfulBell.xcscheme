@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8B1E00000000000000000040"
-               BuildableName = "Mindful Bell.app"
+               BuildableName = "Stillpoint.app"
                BlueprintName = "MindfulBell"
                ReferencedContainer = "container:MindfulBell.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8B1E00000000000000000040"
-            BuildableName = "Mindful Bell.app"
+            BuildableName = "Stillpoint.app"
             BlueprintName = "MindfulBell"
             ReferencedContainer = "container:MindfulBell.xcodeproj">
          </BuildableReference>
@@ -63,7 +63,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8B1E00000000000000000040"
-            BuildableName = "Mindful Bell.app"
+            BuildableName = "Stillpoint.app"
             BlueprintName = "MindfulBell"
             ReferencedContainer = "container:MindfulBell.xcodeproj">
          </BuildableReference>
