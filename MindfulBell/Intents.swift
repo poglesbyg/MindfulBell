@@ -5,7 +5,7 @@ import AppIntents
 
 struct ProRequiredError: Error, CustomLocalizedStringResourceConvertible {
     var localizedStringResource: LocalizedStringResource {
-        "This action is part of Mindful Bell Pro. Open Mindful Bell and choose Unlock Pro."
+        "This action is part of Stillpoint Pro. Open Stillpoint and choose Unlock Pro."
     }
 }
 
@@ -17,9 +17,9 @@ private func requirePro() async throws {
 struct StartMeditationIntent: AppIntent {
     static var title: LocalizedStringResource = "Start Meditation"
     static var description = IntentDescription(
-        "Begins a sit with Mindful Bell and outputs the time the closing bell will ring.")
+        "Begins a sit with Stillpoint and outputs the time the closing bell will ring.")
 
-    @Parameter(title: "Minutes", description: "Leave empty to use the length set in Mindful Bell.")
+    @Parameter(title: "Minutes", description: "Leave empty to use the length set in Stillpoint.")
     var minutes: Int?
 
     static var parameterSummary: some ParameterSummary {
@@ -52,7 +52,7 @@ struct EndMeditationIntent: AppIntent {
 
 struct RingBellIntent: AppIntent {
     static var title: LocalizedStringResource = "Ring Bell"
-    static var description = IntentDescription("Rings the Mindful Bell once.")
+    static var description = IntentDescription("Rings the Stillpoint bell once.")
 
     @MainActor
     func perform() async throws -> some IntentResult {
@@ -124,7 +124,7 @@ struct MindfulBellShortcuts: AppShortcutsProvider {
 
 /// Appears under "Focus Filters" when you edit a Focus in System Settings.
 struct MindfulBellFocusFilter: SetFocusFilterIntent {
-    static var title: LocalizedStringResource = "Mindful Bell"
+    static var title: LocalizedStringResource = "Stillpoint"
     static var description = IntentDescription(
         "Silence Mindful Day bells, or start a sit, while this Focus is on.")
 
@@ -141,7 +141,7 @@ struct MindfulBellFocusFilter: SetFocusFilterIntent {
         if silenceReminders { effects.append("Mindful Day bells silenced") }
         if startSit { effects.append("Starts a sit") }
         let summary = effects.isEmpty ? "No changes" : effects.joined(separator: ", ")
-        return DisplayRepresentation(title: "Mindful Bell", subtitle: "\(summary)")
+        return DisplayRepresentation(title: "Stillpoint", subtitle: "\(summary)")
     }
 
     @MainActor

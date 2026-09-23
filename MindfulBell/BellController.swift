@@ -277,7 +277,7 @@ final class BellController: ObservableObject {
 
     // MARK: Focus and Shortcuts
 
-    /// Called by the Focus filter whenever a Focus with a Mindful Bell filter turns on or off.
+    /// Called by the Focus filter whenever a Focus with a Stillpoint filter turns on or off.
     func applyFocus(silenceReminders: Bool, startSit: Bool) {
         remindersSilencedByFocus = silenceReminders
         // Start only when the setting switches on, so later filter updates don't restart a finished sit.

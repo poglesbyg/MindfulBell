@@ -29,6 +29,7 @@ final class HistoryStore: ObservableObject {
 
     private init() {
         let folder = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
+            // Named for the app's original title; kept so existing history isn't orphaned.
             .appendingPathComponent("Mindful Bell", isDirectory: true)
         try? FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
         url = folder.appendingPathComponent("history.json")

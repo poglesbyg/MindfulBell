@@ -9,8 +9,8 @@ struct ProView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 18) {
             VStack(alignment: .leading, spacing: 4) {
-                Text("Mindful Bell Pro").font(.title.weight(.semibold))
-                Text(store.isPro ? "Unlocked. Thank you for supporting Mindful Bell."
+                Text("Stillpoint Pro").font(.title.weight(.semibold))
+                Text(store.isPro ? "Unlocked. Thank you for supporting Stillpoint."
                                  : "One purchase, no subscription.")
                     .foregroundStyle(.secondary)
             }
@@ -116,6 +116,6 @@ struct ProBadge: View {
                 .background(Color.accentColor, in: Capsule())
         }
         .buttonStyle(.plain)
-        .help("Unlock with Mindful Bell Pro")
+        .help("Unlock with Stillpoint Pro")
     }
 }

@@ -10,13 +10,13 @@
       "internalID" : "6740000001",
       "localizations" : [
         {
-          "description" : "History and streaks, Mindful Day, all bells, and Shortcuts, Siri and Focus.",
-          "displayName" : "Mindful Bell Pro",
+          "description" : "History, Mindful Day, all bells, Shortcuts",
+          "displayName" : "Stillpoint Pro",
           "locale" : "en_US"
         }
       ],
       "productID" : "com.poglesbyg.mindfulbell.pro",
-      "referenceName" : "Mindful Bell Pro",
+      "referenceName" : "Stillpoint Pro",
       "type" : "NonConsumable"
     }
   ],
