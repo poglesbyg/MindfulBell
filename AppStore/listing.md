@@ -104,7 +104,9 @@ Mac screenshots must be 16:10: 1280×800, 1440×900, 2560×1600 or 2880×1800. U
 
 How to capture: set a calm desktop picture, hide other menu bar items if you can, then press ⌘⇧5 and choose **Capture Entire Screen**. On a Retina display the capture is twice the "Looks like" size in System Settings › Displays, so a display set to look like 1440×900 gives 2880×1800 exactly. Otherwise, crop to 16:10 and resize to 2880×1800 in Preview (Tools › Adjust Size).
 
-Suggested set:
+**Ready to upload:** `AppStore/screenshots/final/`. Use either `captioned/` or `plain/` (all 2880×1800, no transparency), in file-name order. `iap-review-pro-window.png` is the in-app purchase's review screenshot. Regenerate them from the raw captures with `python3 AppStore/make_screenshots.py --fonts <folder with Inter-SemiBold.ttf>`.
+
+Suggested set (shots 1–4 are done; the Shortcuts shot was skipped):
 
 1. The menu open over a calm desktop, idle, showing duration and bell choices. Caption: "Meditation, one click away"
 2. A sit in progress: time remaining in the menu bar and the large countdown. Caption: "Just you and the bell"
