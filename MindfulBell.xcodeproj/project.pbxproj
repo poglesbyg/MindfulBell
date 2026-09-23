@@ -10,6 +10,7 @@
 		8B1E00000000000000000001 /* Mindful Bell.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mindful Bell.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B1E00000000000000000002 /* MindfulBell.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MindfulBell.entitlements; sourceTree = "<group>"; };
 		8B1E00000000000000000003 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		8B1E00000000000000000004 /* MindfulBell.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = MindfulBell.storekit; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -36,6 +37,7 @@
 			children = (
 				8B1E00000000000000000003 /* README.md */,
 				8B1E00000000000000000002 /* MindfulBell.entitlements */,
+				8B1E00000000000000000004 /* MindfulBell.storekit */,
 				8B1E00000000000000000010 /* MindfulBell */,
 				8B1E00000000000000000031 /* Products */,
 			);

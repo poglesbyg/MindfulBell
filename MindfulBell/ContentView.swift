@@ -3,6 +3,7 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject private var bell: BellController
     @EnvironmentObject private var history: HistoryStore
+    @EnvironmentObject private var store: Store
     @Environment(\.openWindow) private var openWindow
 
     var body: some View {
@@ -18,10 +19,13 @@ struct ContentView: View {
             sound
             Divider()
             HStack {
-                Button("History") { show(WindowID.history) }
+                Button("History") { show(store.isPro ? WindowID.history : WindowID.pro) }
                 Button("Settings") { show(WindowID.settings) }
                     .keyboardShortcut(",")
                 Spacer()
+                if !store.isPro {
+                    Button("Unlock Pro") { show(WindowID.pro) }
+                }
                 Button("Quit") { NSApp.terminate(nil) }
                     .keyboardShortcut("q")
             }
@@ -108,19 +112,29 @@ struct ContentView: View {
 
     // MARK: Reminders
 
+    private var remindersTitle: some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text("Mindful day").font(.headline)
+            Text("A bell now and then to stop and breathe")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        }
+    }
+
     private var reminders: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Toggle(isOn: $bell.remindersEnabled) {
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("Mindful day").font(.headline)
-                    Text("A bell now and then to stop and breathe")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+            if store.isPro {
+                Toggle(isOn: $bell.remindersEnabled) { remindersTitle }
+                    .toggleStyle(.switch)
+            } else {
+                HStack {
+                    remindersTitle
+                    Spacer()
+                    ProBadge()
                 }
             }
-            .toggleStyle(.switch)
 
-            if bell.remindersEnabled {
+            if store.isPro && bell.remindersEnabled {
                 Picker("Every", selection: $bell.reminderMinutes) {
                     ForEach([15, 20, 30, 45, 60, 90, 120], id: \.self) { m in
                         Text(m < 60 ? "\(m) min" : (m % 60 == 0 ? "\(m / 60) hr" : "\(m / 60) hr \(m % 60) min")).tag(m)
@@ -161,7 +175,10 @@ struct ContentView: View {
         VStack(alignment: .leading, spacing: 8) {
             Picker("Bell", selection: $bell.tone) {
                 ForEach(BellTone.allCases) { tone in
-                    Text(tone.name).tag(tone)
+                    let locked = !tone.isFree && !store.isPro
+                    Text(locked ? "\(tone.name) (Pro)" : tone.name)
+                        .tag(tone)
+                        .selectionDisabled(locked)
                 }
             }
             HStack {
