@@ -58,15 +58,15 @@ To shoot the Pro window as a free user, for the in-app purchase review screensho
 
 ## App Store checklist
 
-Already in place: App Sandbox, Hardened Runtime, the app icon, a privacy manifest (`PrivacyInfo.xcprivacy`, declaring UserDefaults use and no data collection), the Health & Fitness category, and no network access.
+Already in place: App Sandbox, Hardened Runtime, the app icon, a privacy manifest (`PrivacyInfo.xcprivacy`, declaring UserDefaults use and no data collection), the Health & Fitness category, the copyright line, and no network access.
 
 Still to do:
 
 - [ ] Join the Apple Developer Program and set your team (above).
 - [ ] Create the app record in App Store Connect. Every field, the keywords and the description are in `AppStore/listing.md`.
-- [ ] Privacy policy and support URLs: https://poglesbyg.github.io/stillpoint/privacy.html and https://poglesbyg.github.io/stillpoint/ (source in the poglesbyg.github.io repository).
-- [ ] In App Store Connect, add a **Non-Consumable** in-app purchase with product ID `com.poglesbyg.mindfulbell.pro`, a price, a display name and description, and a review screenshot of the Pro window. Submit it together with the first version of the app.
-- [ ] Screenshots (at least one, 2880×1800 or another accepted Mac size) and a description.
+- [x] Privacy policy and support URLs: https://poglesbyg.github.io/stillpoint/privacy.html and https://poglesbyg.github.io/stillpoint/ (source in the poglesbyg.github.io repository).
+- [ ] In App Store Connect, add a **Non-Consumable** in-app purchase with product ID `com.poglesbyg.mindfulbell.pro`, a price, a display name and description, Family Sharing on, and a review screenshot of the Pro window (`AppStore/screenshots/final/iap-review-pro-window.png`). Submit it together with the first version of the app.
+- [x] Screenshots and description: four 2880×1800 screenshots in `AppStore/screenshots/final/`, and the description in `AppStore/listing.md`. They still need uploading.
 - [ ] App Privacy questionnaire: "Data Not Collected".
 - [ ] Product › Archive, then Distribute App › App Store Connect.
 

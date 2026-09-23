@@ -76,7 +76,7 @@ Create under **Monetization › In-App Purchases**, type **Non-Consumable**.
 | Reference name | Stillpoint Pro |
 | Product ID | com.poglesbyg.mindfulbell.pro (must match exactly) |
 | Price | $4.99 (US), or your choice |
-| Family Sharing | Optional. If you turn it on, update the support page's "Restoring a purchase" section to say so. |
+| Family Sharing | On. The support page's "Restoring a purchase" section says so, and `MindfulBell.storekit` matches. If you turn it off, update both. |
 | Display name (14/30) | Stillpoint Pro |
 | Description (42/45) | History, Mindful Day, all bells, Shortcuts |
 | Review screenshot | The Pro window (menu bar › Unlock Pro) |
