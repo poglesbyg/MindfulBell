@@ -16,6 +16,12 @@ final class Store: ObservableObject {
     private var updates: Task<Void, Never>?
 
     private init() {
+        if Demo.isEnabled {
+            // Screenshots show the full app; StoreKit is left alone entirely.
+            isPro = true
+            hasCheckedEntitlements = true
+            return
+        }
         // Purchases made on another Mac, refunds, and Ask to Buy approvals arrive here.
         updates = Task { [weak self] in
             for await result in Transaction.updates {
@@ -36,7 +42,7 @@ final class Store: ObservableObject {
     }
 
     func loadProduct() async {
-        guard product == nil else { return }
+        guard product == nil, !Demo.isEnabled else { return }
         do {
             product = try await Product.products(for: [Self.proProductID]).first
         } catch {

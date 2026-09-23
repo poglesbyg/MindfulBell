@@ -50,6 +50,12 @@
             ReferencedContainer = "container:MindfulBell.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "-StillpointDemo YES"
+            isEnabled = "NO">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <StoreKitConfigurationFileReference
          identifier = "../../MindfulBell.storekit">
       </StoreKitConfigurationFileReference>
