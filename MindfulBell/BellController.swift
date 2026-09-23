@@ -182,8 +182,15 @@ final class BellController: ObservableObject {
     }
 
     func ring(strikes: Int = 1) {
+        // A Pro bell chosen before a refund, say, falls back to the free one.
+        let usable = tone.isFree || Store.shared.isPro ? tone : .bowl
         // Squared so the slider feels even across its range.
-        synth.strike(tone, times: strikes, volume: Float(volume * volume))
+        synth.strike(usable, times: strikes, volume: Float(volume * volume))
+    }
+
+    /// Rings any bell, Pro or not, so people can hear what they'd be buying.
+    func preview(_ tone: BellTone) {
+        synth.strike(tone, times: 1, volume: Float(volume * volume))
     }
 
     // MARK: Display
@@ -260,7 +267,8 @@ final class BellController: ObservableObject {
 
         if remindersEnabled, let next = nextReminder, now >= next {
             // Stay quiet during a sit or a silencing Focus, and skip bells that fell due while the Mac slept.
-            if phase == .idle && !remindersSilencedByFocus && now.timeIntervalSince(next) < 120 {
+            if phase == .idle && Store.shared.isPro && !remindersSilencedByFocus
+                && now.timeIntervalSince(next) < 120 {
                 ring(strikes: 1)
             }
             rescheduleReminder()
@@ -278,6 +286,7 @@ final class BellController: ObservableObject {
     }
 
     private func runShortcut(named name: String) {
+        guard Store.shared.isPro else { return }
         let trimmed = name.trimmingCharacters(in: .whitespaces)
         guard !trimmed.isEmpty else { return }
         var components = URLComponents()

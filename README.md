@@ -11,6 +11,21 @@ A macOS menu bar app with a meditation timer, session history, and bells to brin
 
 Requires macOS 14 (Sonoma) or later and Xcode 16 or later.
 
+## Free and Pro
+
+The meditation timer, interval bells and the singing bowl are free. **Mindful Bell Pro** is a one-time in-app purchase (product ID `com.poglesbyg.mindfulbell.pro`) that unlocks:
+
+- the History window (sits are recorded for everyone, so earlier sits appear once Pro is unlocked)
+- Mindful Day bells
+- the temple bell and small chime (anyone can preview them in the Pro window)
+- Shortcuts actions, Siri phrases, the Focus filter and the start/end shortcuts
+
+Shortcuts actions stay listed for free users; running one says it needs Pro. The code is in `Store.swift` and `ProView.swift`.
+
+### Testing purchases
+
+The **MindfulBell** scheme uses `MindfulBell.storekit`, so runs from Xcode buy Pro from a local test store: no App Store Connect setup, no real money. To start over as a free user, open Debug › StoreKit › Manage Transactions and delete the purchase. If purchases fail with "product not found", check Product › Scheme › Edit Scheme › Run › Options › StoreKit Configuration is set to `MindfulBell.storekit`.
+
 ## Build and run
 
 1. Open `MindfulBell.xcodeproj`.
@@ -37,6 +52,7 @@ Still to do:
 - [ ] Join the Apple Developer Program and set your team (above).
 - [ ] Create the app record in App Store Connect and check the name is available.
 - [ ] Privacy policy URL and support URL (a one-page site is enough; the app collects nothing).
+- [ ] In App Store Connect, add a **Non-Consumable** in-app purchase with product ID `com.poglesbyg.mindfulbell.pro`, a price, a display name and description, and a review screenshot of the Pro window. Submit it together with the first version of the app.
 - [ ] Screenshots (at least one, 2880×1800 or another accepted Mac size) and a description.
 - [ ] App Privacy questionnaire: "Data Not Collected".
 - [ ] Product › Archive, then Distribute App › App Store Connect.
@@ -52,4 +68,6 @@ Still to do:
 | `HistoryView.swift` | History window |
 | `SettingsView.swift` | Settings window |
 | `Intents.swift` | Shortcuts actions, Siri phrases, Focus filter |
+| `Store.swift` | Pro purchase, restore, and entitlement checks (StoreKit 2) |
+| `ProView.swift` | Pro window and the PRO badge on locked features |
 | `BellSynth.swift` | Bell sound generation and playback |

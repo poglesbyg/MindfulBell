@@ -7,6 +7,9 @@ enum BellTone: String, CaseIterable, Identifiable {
 
     var id: String { rawValue }
 
+    /// The bell included without Pro.
+    var isFree: Bool { self == .bowl }
+
     var name: String {
         switch self {
         case .bowl: return "Singing bowl"

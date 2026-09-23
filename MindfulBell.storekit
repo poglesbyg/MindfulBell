@@ -1,0 +1,33 @@
+{
+  "identifier" : "7C1D4E2A",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "4.99",
+      "familyShareable" : true,
+      "internalID" : "6740000001",
+      "localizations" : [
+        {
+          "description" : "History and streaks, Mindful Day, all bells, and Shortcuts, Siri and Focus.",
+          "displayName" : "Mindful Bell Pro",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.poglesbyg.mindfulbell.pro",
+      "referenceName" : "Mindful Bell Pro",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}
