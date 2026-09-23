@@ -14,7 +14,7 @@ Requires macOS 14 (Sonoma) or later and Xcode 16 or later.
 ## Build and run
 
 1. Open `MindfulBell.xcodeproj`.
-2. Select the **MindfulBell** target › **Signing & Capabilities**, pick your team, and change the bundle identifier from `com.example.mindfulbell` to one of your own (e.g. `com.yourname.mindfulbell`).
+2. Select the **MindfulBell** target › **Signing & Capabilities** and pick your team. The bundle identifier is `com.poglesbyg.mindfulbell`; it can't change once the app is uploaded to App Store Connect.
 3. Press ⌘R. Look for the bell in the menu bar.
 
 Every file inside the `MindfulBell/` folder is part of the target automatically; new files you add there are picked up without editing the project.
@@ -34,7 +34,7 @@ Already in place: App Sandbox, Hardened Runtime, the app icon, a privacy manifes
 
 Still to do:
 
-- [ ] Join the Apple Developer Program and set your team and bundle ID (above).
+- [ ] Join the Apple Developer Program and set your team (above).
 - [ ] Create the app record in App Store Connect and check the name is available.
 - [ ] Privacy policy URL and support URL (a one-page site is enough; the app collects nothing).
 - [ ] Screenshots (at least one, 2880×1800 or another accepted Mac size) and a description.
