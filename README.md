@@ -21,6 +21,15 @@ Requires macOS 14 (Sonoma) or later. Everything is free: no purchases, accounts 
 2. Open it. Stillpoint isn't notarized by Apple, so macOS blocks it the first time: click **Done**, then go to **System Settings › Privacy & Security**, scroll down, and click **Open Anyway** next to Stillpoint. You only need to do this once. (Or run `xattr -dr com.apple.quarantine /Applications/Stillpoint.app` in Terminal.)
 3. Look for the bell in the menu bar.
 
+Or with [Homebrew](https://brew.sh):
+
+```
+brew tap poglesbyg/stillpoint https://github.com/poglesbyg/MindfulBell
+brew install --cask poglesbyg/stillpoint/stillpoint
+```
+
+The first launch still needs **Open Anyway**, as above. `brew upgrade` picks up new versions.
+
 Help and the privacy policy: https://poglesbyg.github.io/stillpoint/
 
 ## Build and run
@@ -62,7 +71,7 @@ git tag v1.0
 git push origin v1.0
 ```
 
-The workflow builds the Release configuration with that version number, ad-hoc signs it, and attaches `Stillpoint.zip` to a new GitHub Release with `.github/release-notes.md` as the notes. It isn't notarized, which needs a paid Apple Developer account; that's why first launch needs **Open Anyway**.
+The workflow builds the Release configuration with that version number, ad-hoc signs it, and attaches `Stillpoint.zip` to a new GitHub Release with `.github/release-notes.md` as the notes. It then updates the version and checksum in `Casks/stillpoint.rb` on `main`, so Homebrew users get the new version too. It isn't notarized, which needs a paid Apple Developer account; that's why first launch needs **Open Anyway**.
 
 Already in place: App Sandbox, Hardened Runtime, the app icon, a privacy manifest (`PrivacyInfo.xcprivacy`, declaring UserDefaults use and no data collection), the copyright line, and no network access.
 
