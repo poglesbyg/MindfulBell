@@ -17,7 +17,7 @@ jobs:
   build:
     runs-on: macos-15
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
 
       - name: Build
         run: |
@@ -31,6 +31,7 @@ jobs:
             -project MindfulBell.xcodeproj \
             -scheme MindfulBell \
             -configuration Release \
+            -destination 'generic/platform=macOS' \
             -derivedDataPath build \
             MARKETING_VERSION="$VERSION" \
             CURRENT_PROJECT_VERSION="$GITHUB_RUN_NUMBER" \
@@ -45,9 +46,12 @@ jobs:
           APP=build/Build/Products/Release/Stillpoint.app
           codesign --verify --strict --verbose=2 "$APP"
           codesign -d --entitlements - "$APP" | grep -q com.apple.security.app-sandbox
+          # Universal, so it runs on Intel Macs as well as Apple silicon.
+          lipo -archs "$APP/Contents/MacOS/Stillpoint" | tee /dev/stderr | grep -q x86_64
+          lipo -archs "$APP/Contents/MacOS/Stillpoint" | grep -q arm64
           ditto -c -k --keepParent "$APP" Stillpoint.zip
 
-      - uses: actions/upload-artifact@v5
+      - uses: actions/upload-artifact@v6
         with:
           name: Stillpoint
           path: Stillpoint.zip
