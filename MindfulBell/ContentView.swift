@@ -3,7 +3,6 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject private var bell: BellController
     @EnvironmentObject private var history: HistoryStore
-    @EnvironmentObject private var store: Store
     @Environment(\.openWindow) private var openWindow
 
     var body: some View {
@@ -19,13 +18,10 @@ struct ContentView: View {
             sound
             Divider()
             HStack {
-                Button("History") { show(store.isPro ? WindowID.history : WindowID.pro) }
+                Button("History") { show(WindowID.history) }
                 Button("Settings") { show(WindowID.settings) }
                     .keyboardShortcut(",")
                 Spacer()
-                if !store.isPro {
-                    Button("Unlock Pro") { show(WindowID.pro) }
-                }
                 Button("Quit") { NSApp.terminate(nil) }
                     .keyboardShortcut("q")
             }
@@ -123,18 +119,10 @@ struct ContentView: View {
 
     private var reminders: some View {
         VStack(alignment: .leading, spacing: 8) {
-            if store.isPro {
-                Toggle(isOn: $bell.remindersEnabled) { remindersTitle }
-                    .toggleStyle(.switch)
-            } else {
-                HStack {
-                    remindersTitle
-                    Spacer()
-                    ProBadge()
-                }
-            }
+            Toggle(isOn: $bell.remindersEnabled) { remindersTitle }
+                .toggleStyle(.switch)
 
-            if store.isPro && bell.remindersEnabled {
+            if bell.remindersEnabled {
                 Picker("Every", selection: $bell.reminderMinutes) {
                     ForEach([15, 20, 30, 45, 60, 90, 120], id: \.self) { m in
                         Text(m < 60 ? "\(m) min" : (m % 60 == 0 ? "\(m / 60) hr" : "\(m / 60) hr \(m % 60) min")).tag(m)
@@ -175,10 +163,7 @@ struct ContentView: View {
         VStack(alignment: .leading, spacing: 8) {
             Picker("Bell", selection: $bell.tone) {
                 ForEach(BellTone.allCases) { tone in
-                    let locked = !tone.isFree && !store.isPro
-                    Text(locked ? "\(tone.name) (Pro)" : tone.name)
-                        .tag(tone)
-                        .selectionDisabled(locked)
+                    Text(tone.name).tag(tone)
                 }
             }
             HStack {

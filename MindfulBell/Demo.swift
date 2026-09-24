@@ -1,8 +1,8 @@
 import Foundation
 
-/// Screenshot mode: sample history and Pro unlocked, without touching the real history file
-/// or StoreKit. Turn it on with the `-StillpointDemo YES` launch argument (a disabled entry
-/// is already in the scheme). Debug builds only, so the App Store build can never enter it.
+/// Screenshot mode: sample history, without touching the real history file. Turn it on with
+/// the `-StillpointDemo YES` launch argument (a disabled entry is already in the scheme).
+/// Debug builds only, so a release build can never enter it.
 enum Demo {
     #if DEBUG
     static let isEnabled = UserDefaults.standard.bool(forKey: "StillpointDemo")

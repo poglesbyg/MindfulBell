@@ -2,7 +2,6 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject private var bell: BellController
-    @EnvironmentObject private var store: Store
 
     var body: some View {
         Form {
@@ -10,22 +9,9 @@ struct SettingsView: View {
                 Toggle("Open at login", isOn: $bell.launchAtLogin)
             }
 
-            if !store.isPro {
-                Section {
-                    HStack {
-                        Text("Shortcuts, Siri and Focus are part of Stillpoint Pro.")
-                        Spacer()
-                        ProBadge()
-                    }
-                }
-            }
-
             Section {
-                Group {
-                    TextField("When a sit begins", text: $bell.startShortcutName, prompt: Text("Shortcut name"))
-                    TextField("When a sit ends", text: $bell.endShortcutName, prompt: Text("Shortcut name"))
-                }
-                .disabled(!store.isPro)
+                TextField("When a sit begins", text: $bell.startShortcutName, prompt: Text("Shortcut name"))
+                TextField("When a sit ends", text: $bell.endShortcutName, prompt: Text("Shortcut name"))
                 HStack {
                     Spacer()
                     Button("Open Shortcuts") { open("shortcuts://") }

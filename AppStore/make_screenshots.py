@@ -1,7 +1,7 @@
-"""Builds the App Store screenshots from the raw full-screen captures in AppStore/screenshots/raw.
+"""Builds the screenshots from the raw full-screen captures in AppStore/screenshots/raw.
 
 For each shot it writes a plain version (cropped to 16:10 from the top, so the menu bar stays,
-then resized to 2880x1800 without an alpha channel, which App Store Connect rejects) and a
+then resized to 2880x1800 without an alpha channel) and a
 captioned version on the icon's dusk gradient. Captions use Inter; pass the folder holding
 Inter-SemiBold.ttf with --fonts (https://github.com/rsms/inter/releases).
 
@@ -24,7 +24,6 @@ SHOTS = [
     ('2.16.52', '03-history', 'See your practice grow'),
     ('2.16.35', '04-mindful-day', 'A bell to come back to your breath'),
 ]
-IAP_REVIEW = ('2.17.39', 'iap-review-pro-window')
 
 SKY_TOP, SKY_BOTTOM = (30, 34, 78), (104, 78, 142)
 CAPTION = (250, 236, 210)
@@ -85,8 +84,6 @@ def main():
         shot = to_16x10(raw_capture(raw))
         shot.save(OUT / 'plain' / f'{name}.png', optimize=True)
         captioned(shot, caption, font).save(OUT / 'captioned' / f'{name}.png', optimize=True)
-    raw, name = IAP_REVIEW
-    to_16x10(raw_capture(raw)).save(OUT / f'{name}.png', optimize=True)
     print('Wrote', OUT)
 
 
