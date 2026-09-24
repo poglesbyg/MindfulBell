@@ -1,0 +1,62 @@
+name: Build
+
+# Every push and pull request builds the app. Pushing a tag like v1.0 also publishes
+# Stillpoint.zip as a GitHub Release.
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Build
+        run: |
+          if [[ "$GITHUB_REF_TYPE" == tag ]]; then
+            VERSION="${GITHUB_REF_NAME#v}"
+          else
+            VERSION="0.0.0"
+          fi
+          # Ad-hoc signed ("-"): no Apple Developer account, so no notarization.
+          xcodebuild build \
+            -project MindfulBell.xcodeproj \
+            -scheme MindfulBell \
+            -configuration Release \
+            -derivedDataPath build \
+            MARKETING_VERSION="$VERSION" \
+            CURRENT_PROJECT_VERSION="$GITHUB_RUN_NUMBER" \
+            CODE_SIGN_IDENTITY=- \
+            CODE_SIGN_STYLE=Manual \
+            DEVELOPMENT_TEAM= \
+            | tee xcodebuild.log | grep -E '^(\*\*|.*(error|warning):)' || true
+          test "${PIPESTATUS[0]}" -eq 0
+
+      - name: Check the app
+        run: |
+          APP=build/Build/Products/Release/Stillpoint.app
+          codesign --verify --strict --verbose=2 "$APP"
+          codesign -d --entitlements - "$APP" | grep -q com.apple.security.app-sandbox
+          ditto -c -k --keepParent "$APP" Stillpoint.zip
+
+      - uses: actions/upload-artifact@v5
+        with:
+          name: Stillpoint
+          path: Stillpoint.zip
+
+      - name: Publish release
+        if: github.ref_type == 'tag'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" Stillpoint.zip \
+            --title "Stillpoint ${GITHUB_REF_NAME#v}" \
+            --notes-file .github/release-notes.md

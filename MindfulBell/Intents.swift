@@ -1,18 +1,6 @@
 import AppIntents
 
-// Actions that appear in the Shortcuts app, Spotlight and Siri. They are part of Pro:
-// they stay listed for everyone, and explain themselves if run without it.
-
-struct ProRequiredError: Error, CustomLocalizedStringResourceConvertible {
-    var localizedStringResource: LocalizedStringResource {
-        "This action is part of Stillpoint Pro. Open Stillpoint and choose Unlock Pro."
-    }
-}
-
-@MainActor
-private func requirePro() async throws {
-    guard await Store.shared.checkPro() else { throw ProRequiredError() }
-}
+// Actions that appear in the Shortcuts app, Spotlight and Siri.
 
 struct StartMeditationIntent: AppIntent {
     static var title: LocalizedStringResource = "Start Meditation"
@@ -28,7 +16,6 @@ struct StartMeditationIntent: AppIntent {
 
     @MainActor
     func perform() async throws -> some IntentResult & ReturnsValue<Date> {
-        try await requirePro()
         let bell = BellController.shared
         bell.begin(minutes: minutes.map { min(max($0, 1), 240) })
         return .result(value: bell.expectedEnd ?? Date())
@@ -44,7 +31,6 @@ struct EndMeditationIntent: AppIntent {
 
     @MainActor
     func perform() async throws -> some IntentResult {
-        try await requirePro()
         BellController.shared.end(ringBell: ringBell)
         return .result()
     }
@@ -56,7 +42,6 @@ struct RingBellIntent: AppIntent {
 
     @MainActor
     func perform() async throws -> some IntentResult {
-        try await requirePro()
         BellController.shared.ring()
         return .result()
     }
@@ -75,7 +60,6 @@ struct SetMindfulDayIntent: AppIntent {
 
     @MainActor
     func perform() async throws -> some IntentResult {
-        try await requirePro()
         BellController.shared.remindersEnabled = enabled
         return .result()
     }
@@ -87,7 +71,6 @@ struct GetMeditationStatsIntent: AppIntent {
 
     @MainActor
     func perform() async throws -> some IntentResult & ReturnsValue<Int> & ProvidesDialog {
-        try await requirePro()
         let history = HistoryStore.shared
         let minutes = history.todaySeconds / 60
         let streak = history.currentStreak
@@ -146,8 +129,6 @@ struct MindfulBellFocusFilter: SetFocusFilterIntent {
 
     @MainActor
     func perform() async throws -> some IntentResult {
-        // Without Pro the filter has no effect, rather than failing each time a Focus changes.
-        guard await Store.shared.checkPro() else { return .result() }
         BellController.shared.applyFocus(silenceReminders: silenceReminders, startSit: startSit)
         return .result()
     }

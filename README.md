@@ -1,6 +1,6 @@
 # Stillpoint
 
-Previously called Mindful Bell; the repository, Xcode target, bundle ID and product ID keep that name.
+Free and open source. Previously called Mindful Bell; the repository, Xcode target and bundle ID keep that name.
 
 A macOS menu bar app with a meditation timer, session history, and bells to bring you back to the present during the day.
 
@@ -11,27 +11,24 @@ A macOS menu bar app with a meditation timer, session history, and bells to brin
 - **Focus**: add the Stillpoint filter to a Focus in System Settings › Focus to silence Mindful Day bells, or start a sit, while that Focus is on. In the app's Settings you can also name shortcuts to run when a sit begins and ends, e.g. to turn Do Not Disturb on and off.
 - **Bells**: singing bowl, temple bell, or small chime, generated from each bell's vibration modes (no audio files). `previews/` has WAV renders of each; they are not part of the app.
 
-Requires macOS 14 (Sonoma) or later and Xcode 16 or later.
+Requires macOS 14 (Sonoma) or later. Everything is free: no purchases, accounts or network access.
 
-## Free and Pro
+![Stillpoint's menu open over the desktop](AppStore/screenshots/final/plain/01-menu.png)
 
-The meditation timer, interval bells and the singing bowl are free. **Stillpoint Pro** is a one-time in-app purchase (product ID `com.poglesbyg.mindfulbell.pro`) that unlocks:
+## Install
 
-- the History window (sits are recorded for everyone, so earlier sits appear once Pro is unlocked)
-- Mindful Day bells
-- the temple bell and small chime (anyone can preview them in the Pro window)
-- Shortcuts actions, Siri phrases, the Focus filter and the start/end shortcuts
+1. Download **Stillpoint.zip** from the [latest release](https://github.com/poglesbyg/MindfulBell/releases/latest), unzip it, and drag Stillpoint to Applications.
+2. Open it. Stillpoint isn't notarized by Apple, so macOS blocks it the first time: click **Done**, then go to **System Settings › Privacy & Security**, scroll down, and click **Open Anyway** next to Stillpoint. You only need to do this once. (Or run `xattr -dr com.apple.quarantine /Applications/Stillpoint.app` in Terminal.)
+3. Look for the bell in the menu bar.
 
-Shortcuts actions stay listed for free users; running one says it needs Pro. The code is in `Store.swift` and `ProView.swift`.
-
-### Testing purchases
-
-The **MindfulBell** scheme uses `MindfulBell.storekit`, so runs from Xcode buy Pro from a local test store: no App Store Connect setup, no real money. To start over as a free user, open Debug › StoreKit › Manage Transactions and delete the purchase. If purchases fail with "product not found", check Product › Scheme › Edit Scheme › Run › Options › StoreKit Configuration is set to `MindfulBell.storekit`.
+Help and the privacy policy: https://poglesbyg.github.io/stillpoint/
 
 ## Build and run
 
+Needs Xcode 16 or later.
+
 1. Open `MindfulBell.xcodeproj`.
-2. Select the **MindfulBell** target › **Signing & Capabilities** and pick your team. The bundle identifier is `com.poglesbyg.mindfulbell`; it can't change once the app is uploaded to App Store Connect.
+2. Select the **MindfulBell** target › **Signing & Capabilities** and pick your team, or choose **Sign to Run Locally** if you don't have one.
 3. Press ⌘R. Look for the bell in the menu bar.
 
 Every file inside the `MindfulBell/` folder is part of the target automatically; new files you add there are picked up without editing the project.
@@ -47,28 +44,27 @@ The app runs them through the Shortcuts app, which may come to the front briefly
 
 ## Screenshot demo mode
 
-For App Store screenshots, run with sample data:
+For screenshots, run with sample data:
 
 1. Product › Scheme › Edit Scheme › Run › Arguments, and tick `-StillpointDemo YES`.
-2. Run (⌘R). History shows about ten weeks of practice with a three-week streak, and Pro is unlocked.
+2. Run (⌘R). History shows about ten weeks of practice with a three-week streak.
 
-Demo mode never reads or writes your real `history.json` (sits you do during a demo aren't kept) and doesn't touch StoreKit. It exists only in Debug builds, so archived builds can't enter it. **Untick the argument afterwards**, or History will keep showing the sample data.
+Demo mode never reads or writes your real `history.json` (sits you do during a demo aren't kept). It exists only in Debug builds, so release builds can't enter it. **Untick the argument afterwards**, or History will keep showing the sample data.
 
-To shoot the Pro window as a free user, for the in-app purchase review screenshot, untick the argument.
+`AppStore/screenshots/final/` holds the finished screenshots (2880×1800, plain and captioned), built from the raw captures with `python3 AppStore/make_screenshots.py --fonts <folder with Inter-SemiBold.ttf>`.
 
-## App Store checklist
+## Releasing
 
-Already in place: App Sandbox, Hardened Runtime, the app icon, a privacy manifest (`PrivacyInfo.xcprivacy`, declaring UserDefaults use and no data collection), the Health & Fitness category, the copyright line, and no network access.
+`.github/workflows/build.yml` builds the app on every push and pull request. To publish a version, tag it and push the tag:
 
-Still to do:
+```
+git tag v1.0
+git push origin v1.0
+```
 
-- [ ] Join the Apple Developer Program and set your team (above).
-- [ ] Create the app record in App Store Connect. Every field, the keywords and the description are in `AppStore/listing.md`.
-- [x] Privacy policy and support URLs: https://poglesbyg.github.io/stillpoint/privacy.html and https://poglesbyg.github.io/stillpoint/ (source in the poglesbyg.github.io repository).
-- [ ] In App Store Connect, add a **Non-Consumable** in-app purchase with product ID `com.poglesbyg.mindfulbell.pro`, a price, a display name and description, Family Sharing on, and a review screenshot of the Pro window (`AppStore/screenshots/final/iap-review-pro-window.png`). Submit it together with the first version of the app.
-- [x] Screenshots and description: four 2880×1800 screenshots in `AppStore/screenshots/final/`, and the description in `AppStore/listing.md`. They still need uploading.
-- [ ] App Privacy questionnaire: "Data Not Collected".
-- [ ] Product › Archive, then Distribute App › App Store Connect.
+The workflow builds the Release configuration with that version number, ad-hoc signs it, and attaches `Stillpoint.zip` to a new GitHub Release with `.github/release-notes.md` as the notes. It isn't notarized, which needs a paid Apple Developer account; that's why first launch needs **Open Anyway**.
+
+Already in place: App Sandbox, Hardened Runtime, the app icon, a privacy manifest (`PrivacyInfo.xcprivacy`, declaring UserDefaults use and no data collection), the copyright line, and no network access.
 
 ## Layout
 
@@ -81,7 +77,9 @@ Still to do:
 | `HistoryView.swift` | History window |
 | `SettingsView.swift` | Settings window |
 | `Intents.swift` | Shortcuts actions, Siri phrases, Focus filter |
-| `Store.swift` | Pro purchase, restore, and entitlement checks (StoreKit 2) |
-| `ProView.swift` | Pro window and the PRO badge on locked features |
 | `BellSynth.swift` | Bell sound generation and playback |
 | `AppStore/make_icon.py` | Draws the app icon and writes every size into the asset catalog (`python3 AppStore/make_icon.py`, needs Pillow) |
+
+## License
+
+MIT. See `LICENSE`.
